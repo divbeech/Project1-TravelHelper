@@ -38,4 +38,3 @@ const Map =({setCoordinates, setBounds, coordinates}) => {
 }
 
 export default Map;
-
