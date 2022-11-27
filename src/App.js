@@ -7,18 +7,25 @@ import Map from './components/Map/Map';
 
 const App = () => {
   const [places, setPlaces] = useState([]);
-  const [coordinates, setCoordinates] = useState({});
-  const [bounds, setBounds] = useState({null});
+  const [coordinates, setCoordinates] = useState({lat:0, lng:0});
+  const [bounds, setBounds] = useState(null);
   
+  useEffect(( )=>{
+    navigator.geolocation.getCurrentPosition(({coords:{latitude, longitude}})=>{
+      setCoordinates()
+
+    })
+  }, []);
 
 
   useEffect(()=>{
+    console.log(coordinates, bounds);
     getPlacesData()
      .then((data)=>{
-      console.log(data);
+      console.log(data); //check if it's being fetch roperly
           setPlaces(data);
     })
-  }, [])
+  }, [coordinates, bounds]);
 
 
 
@@ -36,6 +43,7 @@ const App = () => {
           <Map 
             setCoordinates={setCoordinates}
             setBounds={setBounds}
+            coordinates ={coordinates}
           />
 
         </Grid>
